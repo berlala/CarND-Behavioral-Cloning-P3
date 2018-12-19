@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 [//]: # "Image References"
 
 [image1]: ./pics/nvidia_net.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
+[image2]: ./pics/fork.png "Fork road"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
@@ -61,7 +61,7 @@ The model is reference to the well-known Nvidia research work  in <End to End Le
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains one dropout layers in order to reduce overfitting.
+The model contains one dropout layers with rate 0.7 in order to reduce overfitting. One dropout layer is proofed to work on track1.
 
 #### 3. Model parameter tuning
 
@@ -75,35 +75,27 @@ For details about how I created the training data, see the next section.
 
 ### Model Architecture and Training Strategy
 
-#### 1. Solution Design Approach
+My first step was to use a convolution neural network model similar to the  NVIDIA paper since this paper present a solution to a similar problem.
 
-The overall strategy for deriving a model architecture was to ...
+The first training is taken by the whole train set and validate by the validation set which is 20% of the whole set.  The epoch is set to 5. and the result is quite good.  The car seems can stay on the track for most of time.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+To follow the instruction on the course, a generator is design to process the whole training data. The generator can reduce the usage of the memory during training meanwhile add the random into the training process.  The epoch is set to 2. But the result is not good, although the final validation loss is  0.0157, the car cannot pass the first left turn and get out of the track.  
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+Then the left an right picture from the left and right camera are used to enhance the performance.  A correlation value is set as +0.1 for left picture(since you want the car to turn a little bit to right if in this position) and -0.1 for right picture(model.py line 57~60). The epoch is 3 and the final validation loss is 0.0112. But the car is still cannot finish the whole track. It turn not big enough in the  fork way(show in the following picture).
 
-To combat the overfitting, I modified the model so that ...
+![The fork road][image2]
 
-Then I ... 
 
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+
+The final try is adding the flip picture into the data set (model.py line 57~60). The training epoch is still 3. And finally the car can drive on the track quite well. But in the fork way above, it is still obvious turning not big enough. If it is possible, more pics around this corner should be added into the training set.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-#### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
 
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
-
-![alt text][image1]
-
-#### 3. Creation of the Training Set & Training Process
+#### 2. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
-
-![alt text][image2]
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
