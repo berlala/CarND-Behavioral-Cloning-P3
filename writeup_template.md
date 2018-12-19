@@ -79,7 +79,7 @@ My first step was to use a convolution neural network model similar to the  NVID
 
 The first training is taken by the whole train set and validate by the validation set which is 20% of the whole set.  The epoch is set to 5. and the result is quite good.  The car seems can stay on the track for most of time.
 
-To follow the instruction on the course, a generator is design to process the whole training data. The generator can reduce the usage of the memory during training meanwhile add the random into the training process.  The epoch is set to 2. But the result is not good, although the final validation loss is  0.0157, the car cannot pass the first left turn and get out of the track.  
+To follow the instruction on the course, a generator is design to process the whole training data. The generator can reduce the usage of the memory during training meanwhile add the random into the training process. The validation set is still 20% of the whole set. The generator then load the training set by defined batch size.  The epoch is set to 2. But the result is not good, although the final validation loss is  0.0157, the car cannot pass the first left turn and get out of the track.  
 
 Then the left an right picture from the left and right camera are used to enhance the performance.  A correlation value is set as +0.1 for left picture(since you want the car to turn a little bit to right if in this position) and -0.1 for right picture(model.py line 57~60). The epoch is 3 and the final validation loss is 0.0112. But the car is still cannot finish the whole track. It turn not big enough in the  fork way(show in the following picture).
 
@@ -87,34 +87,8 @@ Then the left an right picture from the left and right camera are used to enhanc
 
 
 
-The final try is adding the flip picture into the data set (model.py line 57~60). The training epoch is still 3. And finally the car can drive on the track quite well. But in the fork way above, it is still obvious turning not big enough. If it is possible, more pics around this corner should be added into the training set.
+The final try is to add the flip pictures into the data set (model.py line 57~60). The training epoch is still 3. And finally the car can drive on the track quite well. But in the fork way above, it is still obvious turning not big enough. If it is possible, more pics around this corner should be added into the training set.
 
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
-
-
-
-#### 2. Creation of the Training Set & Training Process
-
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
-
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
-
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road on track1.
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
