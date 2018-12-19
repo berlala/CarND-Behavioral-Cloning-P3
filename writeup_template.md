@@ -1,8 +1,8 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
+Bolin Zhao
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+E-mail: bolinzhao@yahoo.com
 
 ---
 
@@ -16,9 +16,9 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
-[//]: # (Image References)
+[//]: # "Image References"
 
-[image1]: ./examples/placeholder.png "Model Visualization"
+[image1]: ./pics/nvidia_net.png "Model Visualization"
 [image2]: ./examples/placeholder.png "Grayscaling"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
@@ -26,8 +26,7 @@ The goals / steps of this project are the following:
 [image6]: ./examples/placeholder_small.png "Normal Image"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+
 
 ---
 ### Files Submitted & Code Quality
@@ -54,23 +53,23 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+The model is reference to the well-known Nvidia research work  in <End to End Learning for Self-Driving Cars>. The  structure is shown as below, it consist of 5 convolutional layers, 1 flatten layer and 3 fully-connected layers. Since in this project, the output is only a number, the final neurons is only 1 which represent the steering angle.
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+![the Nvidia CNN model][image1]
+
+
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model contains one dropout layers in order to reduce overfitting.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+The model used an adam optimizer.
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
+Training data was chosen to keep the vehicle driving on the road. In this project, the Udaicty provided sample data is used as the resource. 
 
 For details about how I created the training data, see the next section. 
 
